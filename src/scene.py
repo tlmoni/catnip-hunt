@@ -15,7 +15,7 @@ FRAME_TIME = 12      # ms/frame, adjusted to get a smooth refresh rate
 
 
 class Scene(QGraphicsScene):
-    """Graphics scene of the game, holding all the graphic objects and functions as the core frame."""
+    """Graphics scene of the game, holding all the graphic objects and functions as the core frame"""
 
     def __init__(self, mainmenu, level, parent=None):
         QGraphicsScene.__init__(self, parent)
@@ -70,12 +70,13 @@ class Scene(QGraphicsScene):
         self.update()        # Update game
 
     def scene_update(self):
-        self.mega_update()
-        self.enemy_update()
+        self.mega_update()                     # Update Mega Noonoo location
+        self.enemy_update()                    # Update enemy locations
         self.player.update(self.keys_pressed)  # Update player location
         self.view.centerOn(self.player.pos())  # Center camera
 
-    def mega_update(self):  # Update Mega Noonoo location and image (animation)
+    def mega_update(self):
+        """Update Mega Noonoo location and image (animation)"""
         if self.mega is not None:
             self.mega.setX(self.mega.x() + self.mega.movement)
             if self.animation_timer == 100:
@@ -83,7 +84,8 @@ class Scene(QGraphicsScene):
             elif self.animation_timer >= 50:
                 self.mega.setPixmap(QPixmap('./pictures/mega_noonoo_flap.png'))
 
-    def enemy_update(self):  # Update enemy locations and images (animation)
+    def enemy_update(self):
+        """Update enemy locations and images (animation)"""
         for enemy in self.enemies:
             self.enemy_image_animation(enemy)
 

@@ -33,10 +33,10 @@ class LevelLoader:
                         self.scene.add_mega(mega_noonoo)
                     if player is None:
                         file.close()
-                        raise Exception('Missing player in level file.')
+                        raise Exception('Missing player in level file!')
                     if catnip is None:
                         file.close()
-                        raise Exception('Missing goal in level file.')
+                        raise Exception('Missing goal in level file!')
 
                     self.scene.add_player(player)
                     start_x = player.x()  # X-coordinate of the starting point
@@ -145,4 +145,4 @@ class LevelLoader:
 
         except OSError:
             file.close()
-            raise Exception('Reading the data failed.')
+            raise Exception('Reading the data failed!')

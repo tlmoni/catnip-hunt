@@ -60,7 +60,7 @@ The game has 4 different maps which can be edited easily with the provided instr
 
 ## Implementation details
 
-The assignment was to create a software project (topic: platform game) using Python and Qt (PyQt5).
+The assignment was to create a software project (topic: platform game) using Python (3) and Qt (PyQt5).
 I used multiple features of Qt to implement my project along with built-in Python features.
 This was my first software project so looking back to it shows some design flaws in the structure.
 Nonetheless it's an enjoyable game that is fun to play and works fluently.

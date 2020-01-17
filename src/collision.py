@@ -6,8 +6,7 @@ from PyQt5.QtCore import QPointF
 
 class Collision:
     """
-    Collision detection class
-    Main features:
+    Collision detection class main features:
     - Collision detection with any object in all 4 directions
     - Collision detection with important objects
     """

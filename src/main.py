@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-"""Main module of the game that holds the MainMenu class and the main script to launch the program."""
+"""Main module of the game that holds the MainMenu class and the main script to launch the program"""
 
 import sys
 
@@ -13,7 +13,7 @@ from scene import Scene
 
 
 class MainMenu(QWidget):
-    """Main menu of the game that holds options: play (level choice) and quit."""
+    """Main menu of the game that holds options: play (level choice) and quit"""
 
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)

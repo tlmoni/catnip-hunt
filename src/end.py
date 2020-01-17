@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QLabel, QPushButton, QWidget
 
 
 class End(QWidget):
-    """Popup screen that informs the player about the victory and offers a replay option."""
+    """Popup screen that informs the player about victory or loss and offers replay and quit options"""
 
     def __init__(self, mainmenu, background, parent=None):
         QWidget.__init__(self, parent)
@@ -20,7 +20,7 @@ class End(QWidget):
         self.init_menu()
 
     def init_menu(self):
-        """Set up the victory menu layout"""
+        """Set up the end menu layout"""
         title_image = QLabel(self)
         title_image.setPixmap(QPixmap(self.background).scaled(579, 207))
         title_image.move(515, 120)

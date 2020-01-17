@@ -6,9 +6,7 @@ from PyQt5.QtWidgets import QGridLayout, QLabel, QPushButton, QWidget
 
 
 class Instructions(QWidget):
-    """Instructs the player visually with pictures and text, how to play the game."""
-
-    play_time = 0
+    """Visually instructs the player how to play the game (with pictures and text)"""
 
     def __init__(self, mainmenu, parent=None):
         QWidget.__init__(self, parent)

@@ -26,7 +26,7 @@ class Player(QGraphicsPixmapItem):
         self.collideable = True
 
     def jump(self):
-        """The jump action of the player, executes an upward movement with decreasing velocity."""
+        """The jump action of the player, executes an upward movement with decreasing velocity"""
 
         if self.collision.check_over_collision(self.scene, self):
             Player.jump_velocity = 0
@@ -38,16 +38,18 @@ class Player(QGraphicsPixmapItem):
             Player.count += 1
 
     def update(self, keys_pressed):
-        """Update the game situation from the player's perspective."""
+        """Update the game situation from the player's perspective"""
 
         delta_x = 0  # Change of x-coordinate
 
+        # Esc pressed, return to menu
         if Qt.Key_Escape in self.scene.keys_pressed:
             self.scene.timer.stop()  # Freeze the game timer
             self.scene.mainmenu.show()
             self.scene.mainmenu.main_menu()
             self.scene.view.close()
 
+        # Movement top the right
         if Qt.Key_Right in self.scene.keys_pressed or Qt.Key_D in self.scene.keys_pressed:
             delta_x += Player.movement_speed  # Change x-coordinate by 1 unit of movement speed towards right
 
@@ -60,6 +62,7 @@ class Player(QGraphicsPixmapItem):
             else:
                 self.setX(self.x() + delta_x)
 
+        # Movement to the left
         elif Qt.Key_Left in self.scene.keys_pressed or Qt.Key_A in self.scene.keys_pressed:
             delta_x -= Player.movement_speed  # Change x-coordinate by 1 unit of movement speed towards left
 
@@ -72,6 +75,7 @@ class Player(QGraphicsPixmapItem):
             else:
                 self.setX(self.x() + delta_x)
 
+        # Jump
         if Qt.Key_Space in keys_pressed:
             Player.space = True  # Initiates jump()
             items = self.collidingItems()
@@ -80,22 +84,27 @@ class Player(QGraphicsPixmapItem):
                     Player.space = False
 
         if Player.space:
-            self.jump()  # Execute jump()
+            self.jump()
 
+        # Check if the goal has been reached
         if self.collision.catnip_collision(self.scene, self):
             self.scene.victory()
 
+        # Check collision with a bucket
         if self.collision.bucket_collision(self.scene, self):
             self.scene.loss()
 
+        # Check collision with an enemy
         if self.collision.enemy_collision(self.scene, self):
             Player.jump_velocity = 0
             Player.fall_velocity = 0
             self.scene.loss()
 
+        # Check if the player has fallen out of the map
         if self.y() > self.scene.y:
             self.scene.loss()
 
+        # Check if the player touches a platform beneath
         if self.collision.check_under_collision(self.scene, self):
             Player.fall_velocity = 0  # Stops the player from falling when it hits the ground
             Player.count = 0
