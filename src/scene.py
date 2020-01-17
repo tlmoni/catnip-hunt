@@ -1,16 +1,12 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
+from PyQt5.QtCore import Qt, QBasicTimer
+from PyQt5.QtGui import QBrush, QColor, QIcon, QPixmap
+from PyQt5.QtWidgets import QGraphicsScene, QGraphicsView
 
-from level_loader import LevelLoader
 from collision import Collision
-from victory import Victory
-from loss import Loss
-
-__author__ = 'Toni Ojala'
+from end import End
+from level_loader import LevelLoader
 
 
 SCREEN_WIDTH = 1600  # pixels
@@ -138,16 +134,15 @@ class Scene(QGraphicsScene):
         self.pipe = pipe
         self.addItem(self.pipe)
 
-    def loss(self):
-        self.timer.stop()                   # Freeze the game timer
-        pos = self.view.mapToScene(0, -16)  # Get the position of the proxy widget
-        loss = Loss(self.mainmenu)
-        loss.move(pos.toPoint())            # Set the position of the widget
-        self.addWidget(loss, Qt.Widget)
+    def end(self, background):
+        self.timer.stop()                     # Freeze the game timer
+        pos = self.view.mapToScene(0, -16)    # Get the position of the proxy widget
+        end = End(self.mainmenu, background)  # Initialize the end screen
+        end.move(pos.toPoint())               # Set the position of the widget
+        self.addWidget(end, Qt.Widget)
 
     def victory(self):
-        self.timer.stop()
-        pos = self.view.mapToScene(0, -16)
-        victory = Victory(self.mainmenu)
-        victory.move(pos.toPoint())
-        self.addWidget(victory, Qt.Widget)
+        self.end('./pictures/victory.png')
+
+    def loss(self):
+        self.end('./pictures/you_lost.png')

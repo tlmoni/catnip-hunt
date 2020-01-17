@@ -1,12 +1,9 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 from PyQt5.QtGui import QPixmap
 
 from item import Item
 from player import Player
-
-__author__ = 'Toni Ojala'
 
 
 class LevelLoader:
@@ -35,8 +32,10 @@ class LevelLoader:
                     if mega_noonoo:
                         self.scene.add_mega(mega_noonoo)
                     if player is None:
+                        file.close()
                         raise Exception('Missing player in level file.')
                     if catnip is None:
+                        file.close()
                         raise Exception('Missing goal in level file.')
 
                     self.scene.add_player(player)
@@ -44,6 +43,7 @@ class LevelLoader:
                     start_y = player.y()  # Y-coordinate of the starting point
                     if pipe:
                         self.scene.add_pipe(pipe)
+                    file.close()
                     return x, y, start_x, start_y  # Return width, height and the coordinate values
 
                 else:
@@ -144,4 +144,5 @@ class LevelLoader:
                         y += 64
 
         except OSError:
+            file.close()
             raise Exception('Reading the data failed.')

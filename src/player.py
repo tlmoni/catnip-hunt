@@ -1,19 +1,16 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QGraphicsPixmapItem
 
 from collision import Collision
-
-__author__ = 'Toni Ojala'
 
 
 class Player(QGraphicsPixmapItem):
     """The player class of the game"""
 
-    MOVEMENT_SPEED = 4  # pixels/frame
+    movement_speed = 4  # pixels/frame
     space = False
     direction = 1
     gravity = 0.5
@@ -52,7 +49,7 @@ class Player(QGraphicsPixmapItem):
             self.scene.view.close()
 
         if Qt.Key_Right in self.scene.keys_pressed or Qt.Key_D in self.scene.keys_pressed:
-            delta_x += Player.MOVEMENT_SPEED  # Change x-coordinate by 1 unit of movement speed towards right
+            delta_x += Player.movement_speed  # Change x-coordinate by 1 unit of movement speed towards right
 
             Player.direction = 1
 
@@ -64,7 +61,7 @@ class Player(QGraphicsPixmapItem):
                 self.setX(self.x() + delta_x)
 
         elif Qt.Key_Left in self.scene.keys_pressed or Qt.Key_A in self.scene.keys_pressed:
-            delta_x -= Player.MOVEMENT_SPEED  # Change x-coordinate by 1 unit of movement speed towards left
+            delta_x -= Player.movement_speed  # Change x-coordinate by 1 unit of movement speed towards left
 
             Player.direction = -1
 

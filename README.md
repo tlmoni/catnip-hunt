@@ -35,12 +35,12 @@ The game has 4 different maps which can be edited easily with the provided instr
 
 ## Install dependencies
 
-    pip install pyqt5
+    pip3 install pyqt5
 
 ## Running the program
 
     cd src
-    python catnip_hunt.py
+    python3 main.py
 
 ## Controls
 

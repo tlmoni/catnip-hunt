@@ -1,10 +1,7 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from PyQt5.QtCore import QPointF
 from PyQt5.Qt import QTransform
-
-__author__ = 'Toni Ojala'
+from PyQt5.QtCore import QPointF
 
 
 class Collision:
@@ -19,27 +16,29 @@ class Collision:
         self.transform = QTransform()
 
     def catnip_collision(self, scene, player):
-        """Checks if the player collides with catnip aka the goal."""
+        """Check if the player collides with catnip aka the goal"""
         if player.collidesWithItem(scene.catnip):
             return True
         return False
 
     def enemy_collision(self, scene, player):
-        """Checks if the player collides with an enemy."""
+        """Check if the player collides with an enemy"""
         item_top_left = scene.itemAt(player.pos() + QPointF(10, 3), self.transform)       # Left top corner
         item_bottom_left = scene.itemAt(player.pos() + QPointF(10, 59), self.transform)   # Left bottom corner
         item_top_right = scene.itemAt(player.pos() + QPointF(52, 3), self.transform)      # Right top corner
         item_bottom_right = scene.itemAt(player.pos() + QPointF(52, 59), self.transform)  # Right bottom corner
 
+        # Check if the player collides with a normal enemy
         if item_top_left in scene.enemies or item_bottom_left in scene.enemies or item_top_right in scene.enemies or item_bottom_right in scene.enemies:
             return True
+        # Check if the player collides with the mega Noonoo
         elif scene.mega:
             if item_top_left is scene.mega or item_bottom_left is scene.mega or item_top_right is scene.mega or item_bottom_right is scene.mega:
                 return True
         return False
 
     def bucket_collision(self, scene, player):
-        """Checks if the player collides with a bucket under it."""
+        """Check if the player collides with a bucket under it"""
         item_under = scene.itemAt(player.pos() + QPointF(32, 65), self.transform)
 
         if item_under in scene.buckets:
@@ -47,12 +46,11 @@ class Collision:
         return False
 
     def check_left_collision(self, scene, player):
-        """Checks if the player collides with an item towards left of it."""
+        """Check if the player collides with an item towards left of it"""
         item_top_left = scene.itemAt(player.pos() + QPointF(12, 0), self.transform)      # Left top corner
         item_bottom_left = scene.itemAt(player.pos() + QPointF(12, 63), self.transform)  # Left bottom corner
 
         try:
-
             if item_top_left:
                 if item_top_left.collideable:
                     difference = item_top_left.x() - player.x()
@@ -75,12 +73,11 @@ class Collision:
             return False
 
     def check_right_collision(self, scene, player):
-        """Checks if the player collides with an item towards right of it."""
+        """Check if the player collides with an item towards right of it"""
         item_top_right = scene.itemAt(player.pos() + QPointF(50, 0), self.transform)      # Right top corner
         item_bottom_right = scene.itemAt(player.pos() + QPointF(50, 63), self.transform)  # Right bottom corner
 
         try:
-
             if item_top_right:
                 if item_top_right.collideable:
                     difference = item_top_right.x() - player.x()
@@ -103,7 +100,7 @@ class Collision:
             return False
 
     def check_under_collision(self, scene, player):
-        """Checks if the player collides with an item under it."""
+        """Check if the player collides with an item under it"""
         item_under_left = scene.itemAt(player.pos() + QPointF(16, 64 + player.fall_velocity), self.transform)
         item_under_right = scene.itemAt(player.pos() + QPointF(46, 64 + player.fall_velocity), self.transform)
         dx = 0
@@ -161,12 +158,11 @@ class Collision:
             return False
 
     def check_over_collision(self, scene, player):
-        """Checks if the player collides with an item on top of it."""
+        """Check if the player collides with an item on top of it"""
         item_over_left = scene.itemAt(player.pos() + QPointF(16, - player.jump_velocity), self.transform)
         item_over_right = scene.itemAt(player.pos() + QPointF(46, - player.jump_velocity), self.transform)
 
         try:
-
             if item_over_right:
                 if item_over_right.collideable:
                     player.jump_velocity = 0
@@ -186,6 +182,7 @@ class Collision:
             return False
 
     def enemy_movement_collision(self, scene, enemy):
+        """Check if an enemy collides with something on the left or right"""
         item_left = scene.itemAt(enemy.pos() + QPointF(-1, 32), self.transform)   # Left top corner
         item_right = scene.itemAt(enemy.pos() + QPointF(65, 32), self.transform)  # Right top corner
 

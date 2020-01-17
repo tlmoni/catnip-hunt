@@ -1,9 +1,6 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 from PyQt5.QtWidgets import QGraphicsPixmapItem
-
-__author__ = 'Toni Ojala'
 
 
 class Item(QGraphicsPixmapItem):

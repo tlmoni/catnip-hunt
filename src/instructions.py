@@ -1,11 +1,8 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QPixmap, QIcon, QPalette, QBrush, QColor
-
-__author__ = 'Toni Ojala'
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QBrush, QColor, QIcon, QPalette, QPixmap
+from PyQt5.QtWidgets import QGridLayout, QLabel, QPushButton, QWidget
 
 
 class Instructions(QWidget):

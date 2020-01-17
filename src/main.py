@@ -1,17 +1,15 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-import sys
-
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-
-from instructions import Instructions
-from scene import Scene
 
 """Main module of the game that holds the MainMenu class and the main script to launch the program."""
 
-__author__ = 'Toni Ojala'
+import sys
+
+from PyQt5.QtGui import QBrush, QColor, QIcon, QPalette, QPixmap, QLinearGradient
+from PyQt5.QtWidgets import QApplication, QPushButton, QWidget
+
+from instructions import Instructions
+from scene import Scene
 
 
 class MainMenu(QWidget):
@@ -61,7 +59,7 @@ class MainMenu(QWidget):
                                 border: none;
                                 ''')
         self.quit.move(575, 400)
-        self.quit.clicked.connect(self.close)
+        self.quit.clicked.connect(exit)
         self.mainmenu_items.append(self.quit)
 
         self.show()

@@ -1,18 +1,16 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
-
-__author__ = 'Toni Ojala'
+from PyQt5.QtGui import QBrush, QColor, QPalette, QPixmap
+from PyQt5.QtWidgets import QLabel, QPushButton, QWidget
 
 
-class Victory(QWidget):
+class End(QWidget):
     """Popup screen that informs the player about the victory and offers a replay option."""
 
-    def __init__(self, mainmenu, parent=None):
+    def __init__(self, mainmenu, background, parent=None):
         QWidget.__init__(self, parent)
         self.mainmenu = mainmenu
+        self.background = background
         self.palette = QPalette()
         self.palette.setBrush(QPalette.Background, QBrush(QColor(255, 255, 255, 160)))
         self.setPalette(self.palette)
@@ -24,7 +22,7 @@ class Victory(QWidget):
     def init_menu(self):
         """Set up the victory menu layout"""
         title_image = QLabel(self)
-        title_image.setPixmap(QPixmap('./pictures/victory.png').scaled(579, 207))
+        title_image.setPixmap(QPixmap(self.background).scaled(579, 207))
         title_image.move(515, 120)
 
         self.replay = QPushButton('REPLAY!', self)
