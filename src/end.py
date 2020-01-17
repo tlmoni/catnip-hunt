@@ -44,10 +44,9 @@ class End(QWidget):
         self.quit.clicked.connect(self.menu)
 
     def start_game(self):
-        self.mainmenu.scene.player.setPos(self.mainmenu.scene.start_x, self.mainmenu.scene.start_y)  # Reset position
         if self.mainmenu.scene.mega is not None:
             self.mainmenu.scene.mega.setPos(0, self.mainmenu.scene.start_y + 64)
-            self.mainmenu.scene.player.setPos(self.mainmenu.scene.start_x, self.mainmenu.scene.start_y)
+        self.mainmenu.scene.player.setPos(self.mainmenu.scene.start_x, self.mainmenu.scene.start_y)  # Reset position
         self.mainmenu.scene.timer.start(12, self.mainmenu.scene)  # Restart the game timer
         self.close()
 
